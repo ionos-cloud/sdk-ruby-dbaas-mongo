@@ -1,4 +1,4 @@
-![CI](https://github.com/ionos-cloud/sdk-resources/workflows/%5B%20CI%20%5D%DBaaS%20Mongo%20/%20Ruby/badge.svg)
+![CI](https://github.com/ionos-cloud/sdk-resources/workflows/%5B%20CI%20%5D%20DBaaS%20Mongo%20/%20Ruby/badge.svg)
 [![Gem Version](https://img.shields.io/gem/v/ionoscloud-cert-manager)](https://rubygems.org/gems/ionoscloud-cert-manager) 
 [![Gitter](https://badges.gitter.im/ionos-cloud/sdk-general.png)](https://gitter.im/ionos-cloud/sdk-general)
 
