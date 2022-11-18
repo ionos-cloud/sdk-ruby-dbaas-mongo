@@ -21,6 +21,14 @@ module IonoscloudDbaasMongo
     attr_accessor :id
 
 
+    # The name of the template.
+    attr_accessor :name
+
+
+    # The edition of the template (e.g. enterprise)
+    attr_accessor :edition
+
+
     # The number of CPU cores.
     attr_accessor :cores
 
@@ -37,6 +45,10 @@ module IonoscloudDbaasMongo
       {
         
         :'id' => :'id',
+
+        :'name' => :'name',
+
+        :'edition' => :'edition',
 
         :'cores' => :'cores',
 
@@ -57,6 +69,10 @@ module IonoscloudDbaasMongo
         
         :'id' => :'String',
 
+        :'name' => :'String',
+
+        :'edition' => :'String',
+
         :'cores' => :'Integer',
 
         :'ram' => :'Integer',
@@ -69,6 +85,8 @@ module IonoscloudDbaasMongo
     def self.openapi_nullable
       Set.new([
         
+
+
 
 
 
@@ -96,6 +114,16 @@ module IonoscloudDbaasMongo
       end
 
 
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+
+      if attributes.key?(:'edition')
+        self.edition = attributes[:'edition']
+      end
+
+
       if attributes.key?(:'cores')
         self.cores = attributes[:'cores']
       end
@@ -119,6 +147,8 @@ module IonoscloudDbaasMongo
 
 
 
+
+
       invalid_properties
     end
 
@@ -129,10 +159,14 @@ module IonoscloudDbaasMongo
 
 
 
+
+
       true
     end
 
     
+
+
 
 
 
@@ -142,6 +176,8 @@ module IonoscloudDbaasMongo
       return true if self.equal?(o)
       self.class == o.class &&
         id == o.id &&
+        name == o.name &&
+        edition == o.edition &&
         cores == o.cores &&
         ram == o.ram &&
         storage_size == o.storage_size
@@ -156,7 +192,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, cores, ram, storage_size].hash
+      [id, name, edition, cores, ram, storage_size].hash
     end
 
     # Builds the object from hash

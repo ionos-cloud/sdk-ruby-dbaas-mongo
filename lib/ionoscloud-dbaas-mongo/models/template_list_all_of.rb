@@ -16,12 +16,23 @@ require 'time'
 module IonoscloudDbaasMongo
   class TemplateListAllOf
   
+    attr_accessor :type
+
+
+    # The unique ID of the resource.
+    attr_accessor :id
+
+
     attr_accessor :items
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         
+        :'type' => :'type',
+
+        :'id' => :'id',
+
         :'items' => :'items'
       }
     end
@@ -35,6 +46,10 @@ module IonoscloudDbaasMongo
     def self.openapi_types
       {
         
+        :'type' => :'ResourceType',
+
+        :'id' => :'String',
+
         :'items' => :'Array<TemplateResponse>'
       }
     end
@@ -43,6 +58,8 @@ module IonoscloudDbaasMongo
     def self.openapi_nullable
       Set.new([
         
+
+
       ])
     end
 
@@ -62,6 +79,16 @@ module IonoscloudDbaasMongo
       }
       
 
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+
       if attributes.key?(:'items') && (value = attributes[:'items']).is_a?(Array)
         self.items = value
       end
@@ -72,6 +99,8 @@ module IonoscloudDbaasMongo
     def list_invalid_properties
       invalid_properties = Array.new
       
+
+
       invalid_properties
     end
 
@@ -79,15 +108,21 @@ module IonoscloudDbaasMongo
     # @return true if the model is valid
     def valid?
       
+
+
       true
     end
 
     
+
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+        type == o.type &&
+        id == o.id &&
         items == o.items
     end
 
@@ -100,7 +135,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [items].hash
+      [type, id, items].hash
     end
 
     # Builds the object from hash

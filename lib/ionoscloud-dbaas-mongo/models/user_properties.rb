@@ -20,10 +20,6 @@ module IonoscloudDbaasMongo
     attr_accessor :username
 
 
-    # The user database to use for authentication.
-    attr_accessor :database
-
-
     attr_accessor :password
 
 
@@ -34,8 +30,6 @@ module IonoscloudDbaasMongo
       {
         
         :'username' => :'username',
-
-        :'database' => :'database',
 
         :'password' => :'password',
 
@@ -54,8 +48,6 @@ module IonoscloudDbaasMongo
         
         :'username' => :'String',
 
-        :'database' => :'String',
-
         :'password' => :'String',
 
         :'roles' => :'Array<UserRoles>'
@@ -66,7 +58,6 @@ module IonoscloudDbaasMongo
     def self.openapi_nullable
       Set.new([
         
-
 
 
       ])
@@ -93,11 +84,6 @@ module IonoscloudDbaasMongo
       end
 
 
-      if attributes.key?(:'database')
-        self.database = attributes[:'database']
-      end
-
-
       if attributes.key?(:'password')
         self.password = attributes[:'password']
       end
@@ -118,13 +104,12 @@ module IonoscloudDbaasMongo
       end
 
 
-      if @database.nil?
-        invalid_properties.push('invalid value for "database", database cannot be nil.')
-      end
-
-
       if @password.nil?
         invalid_properties.push('invalid value for "password", password cannot be nil.')
+      end
+
+      if @password.to_s.length < 10
+        invalid_properties.push('invalid value for "password", the character length must be great than or equal to 10.')
       end
 
 
@@ -137,15 +122,27 @@ module IonoscloudDbaasMongo
       
       return false if @username.nil?
 
-      return false if @database.nil?
-
       return false if @password.nil?
+      return false if @password.to_s.length < 10
 
       true
     end
 
     
 
+    # Custom attribute writer method with validation
+    # @param [Object] password Value to be assigned
+    def password=(password)
+      if password.nil?
+        fail ArgumentError, 'password cannot be nil'
+      end
+
+      if password.to_s.length < 10
+        fail ArgumentError, 'invalid value for "password", the character length must be great than or equal to 10.'
+      end
+
+      @password = password
+    end
 
 
     # Checks equality by comparing each attribute.
@@ -154,7 +151,6 @@ module IonoscloudDbaasMongo
       return true if self.equal?(o)
       self.class == o.class &&
         username == o.username &&
-        database == o.database &&
         password == o.password &&
         roles == o.roles
     end
@@ -168,7 +164,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, database, password, roles].hash
+      [username, password, roles].hash
     end
 
     # Builds the object from hash

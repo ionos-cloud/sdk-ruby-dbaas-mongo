@@ -232,6 +232,89 @@ module IonoscloudDbaasMongo
       return data, status_code, headers
     end
 
+    # Patch a MongoDB User by ID
+    # Patches a MongoDB user specified by its ID.
+    # @param cluster_id [String] The unique ID of the cluster.
+    # @param database [String] The authentication database.
+    # @param username [String] The authentication username.
+    # @param patch_user_request [PatchUserRequest] Part of the MongoDB user which should be modified.
+    # @param [Hash] opts the optional parameters
+    # @return [User]
+    def clusters_users_patch(cluster_id, database, username, patch_user_request, opts = {})
+      data, _status_code, _headers = clusters_users_patch_with_http_info(cluster_id, database, username, patch_user_request, opts)
+      data
+    end
+
+    # Patch a MongoDB User by ID
+    # Patches a MongoDB user specified by its ID.
+    # @param cluster_id [String] The unique ID of the cluster.
+    # @param database [String] The authentication database.
+    # @param username [String] The authentication username.
+    # @param patch_user_request [PatchUserRequest] Part of the MongoDB user which should be modified.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(User, Integer, Hash)>] User data, response status code and response headers
+    def clusters_users_patch_with_http_info(cluster_id, database, username, patch_user_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsersApi.clusters_users_patch ...'
+      end
+      # verify the required parameter 'cluster_id' is set
+      if @api_client.config.client_side_validation && cluster_id.nil?
+        fail ArgumentError, "Missing the required parameter 'cluster_id' when calling UsersApi.clusters_users_patch"
+      end
+      # verify the required parameter 'database' is set
+      if @api_client.config.client_side_validation && database.nil?
+        fail ArgumentError, "Missing the required parameter 'database' when calling UsersApi.clusters_users_patch"
+      end
+      # verify the required parameter 'username' is set
+      if @api_client.config.client_side_validation && username.nil?
+        fail ArgumentError, "Missing the required parameter 'username' when calling UsersApi.clusters_users_patch"
+      end
+      # verify the required parameter 'patch_user_request' is set
+      if @api_client.config.client_side_validation && patch_user_request.nil?
+        fail ArgumentError, "Missing the required parameter 'patch_user_request' when calling UsersApi.clusters_users_patch"
+      end
+      # resource path
+      local_var_path = '/clusters/{clusterId}/users/{database}/{username}'.sub('{' + 'clusterId' + '}', CGI.escape(cluster_id.to_s)).sub('{' + 'database' + '}', CGI.escape(database.to_s)).sub('{' + 'username' + '}', CGI.escape(username.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(patch_user_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'User'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['basicAuth', 'tokenAuth']
+
+      new_options = opts.merge(
+        :operation => :"UsersApi.clusters_users_patch",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsersApi#clusters_users_patch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create MongoDB User
     # Creates a MongoDB user. 
     # @param cluster_id [String] The unique ID of the cluster.

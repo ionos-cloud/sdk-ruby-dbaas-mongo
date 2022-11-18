@@ -17,7 +17,7 @@ module IonoscloudDbaasMongo
   # The properties with all data needed to create a new MongoDB cluster. 
   class CreateClusterProperties
   
-    # The unique ID of the template, which specifies the number of cores, storage size, and memory. 
+    # The unique ID of the template, which specifies the number of cores, storage size, and memory. You cannot downgrade to a smaller template or minor edition (e.g. from business to playground). To get a list of all templates to confirm the changes use the /templates endpoint. 
     attr_accessor :template_id
 
 

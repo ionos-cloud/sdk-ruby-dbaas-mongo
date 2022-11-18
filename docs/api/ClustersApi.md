@@ -7,6 +7,7 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 | [**clusters_delete**](ClustersApi.md#clusters_delete) | **DELETE** /clusters/{clusterId} | Delete a Cluster |
 | [**clusters_find_by_id**](ClustersApi.md#clusters_find_by_id) | **GET** /clusters/{clusterId} | Get a cluster by id |
 | [**clusters_get**](ClustersApi.md#clusters_get) | **GET** /clusters | Get Clusters |
+| [**clusters_patch**](ClustersApi.md#clusters_patch) | **PATCH** /clusters/{clusterId} | Patch a cluster |
 | [**clusters_post**](ClustersApi.md#clusters_post) | **POST** /clusters | Create a Cluster |
 
 
@@ -234,6 +235,83 @@ basicAuth, tokenAuth
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## clusters_patch
+
+> <ClusterResponse> clusters_patch(cluster_id, patch_cluster_request)
+
+Patch a cluster
+
+Patch attributes of a MongoDB cluster.
+
+### Examples
+
+```ruby
+require 'time'
+require 'ionoscloud-dbaas-mongo'
+# setup authorization
+IonoscloudDbaasMongo.configure do |config|
+  # Configure HTTP basic authorization: basicAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure API key authorization: tokenAuth
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = IonoscloudDbaasMongo::ClustersApi.new
+cluster_id = 'cluster_id_example' # String | The unique ID of the cluster.
+patch_cluster_request = IonoscloudDbaasMongo::PatchClusterRequest.new # PatchClusterRequest | Part of the cluster which should be modified.
+
+begin
+  # Patch a cluster
+  result = api_instance.clusters_patch(cluster_id, patch_cluster_request)
+  p result
+rescue IonoscloudDbaasMongo::ApiError => e
+  puts "Error when calling ClustersApi->clusters_patch: #{e}"
+end
+```
+
+#### Using the clusters_patch_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ClusterResponse>, Integer, Hash)> clusters_patch_with_http_info(cluster_id, patch_cluster_request)
+
+```ruby
+begin
+  # Patch a cluster
+  data, status_code, headers = api_instance.clusters_patch_with_http_info(cluster_id, patch_cluster_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ClusterResponse>
+rescue IonoscloudDbaasMongo::ApiError => e
+  puts "Error when calling ClustersApi->clusters_patch_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **cluster_id** | **String** | The unique ID of the cluster. |  |
+| **patch_cluster_request** | [**PatchClusterRequest**](PatchClusterRequest.md) | Part of the cluster which should be modified. |  |
+
+### Return type
+
+[**ClusterResponse**](ClusterResponse.md)
+
+### Authorization
+
+basicAuth, tokenAuth
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

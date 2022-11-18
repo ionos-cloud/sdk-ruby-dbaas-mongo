@@ -14,57 +14,21 @@ require 'date'
 require 'time'
 
 module IonoscloudDbaasMongo
-  # Properties of a database cluster.
-  class ClusterProperties
+  # MongoDB database user patch request.
+  class PatchUserRequest
   
-    # The name of your cluster.
-    attr_accessor :display_name
+    attr_accessor :metadata
 
 
-    # The MongoDB version of your cluster.
-    attr_accessor :mongo_db_version
-
-
-    # The physical location where the cluster will be created. This is the location where all your instances will be located. This property is immutable. 
-    attr_accessor :location
-
-
-    # The total number of instances in the cluster (one primary and n-1 secondaries). 
-    attr_accessor :instances
-
-
-    attr_accessor :connections
-
-
-    attr_accessor :maintenance_window
-
-
-    # The unique ID of the template, which specifies the number of cores, storage size, and memory. You cannot downgrade to a smaller template or minor edition (e.g. from business to playground). To get a list of all templates to confirm the changes use the /templates endpoint. 
-    attr_accessor :template_id
-
-
-    # The connection string for your cluster.
-    attr_accessor :connection_string
+    attr_accessor :properties
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         
-        :'display_name' => :'displayName',
+        :'metadata' => :'metadata',
 
-        :'mongo_db_version' => :'mongoDBVersion',
-
-        :'location' => :'location',
-
-        :'instances' => :'instances',
-
-        :'connections' => :'connections',
-
-        :'maintenance_window' => :'maintenanceWindow',
-
-        :'template_id' => :'templateID',
-
-        :'connection_string' => :'connectionString'
+        :'properties' => :'properties'
       }
     end
 
@@ -77,21 +41,9 @@ module IonoscloudDbaasMongo
     def self.openapi_types
       {
         
-        :'display_name' => :'String',
+        :'metadata' => :'UserMetadata',
 
-        :'mongo_db_version' => :'String',
-
-        :'location' => :'String',
-
-        :'instances' => :'Integer',
-
-        :'connections' => :'Array<Connection>',
-
-        :'maintenance_window' => :'MaintenanceWindow',
-
-        :'template_id' => :'String',
-
-        :'connection_string' => :'String'
+        :'properties' => :'PatchUserProperties'
       }
     end
 
@@ -100,12 +52,6 @@ module IonoscloudDbaasMongo
       Set.new([
         
 
-
-
-
-
-
-
       ])
     end
 
@@ -113,55 +59,25 @@ module IonoscloudDbaasMongo
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `IonoscloudDbaasMongo::ClusterProperties` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `IonoscloudDbaasMongo::PatchUserRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `IonoscloudDbaasMongo::ClusterProperties`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `IonoscloudDbaasMongo::PatchUserRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
       
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
 
 
-      if attributes.key?(:'mongo_db_version')
-        self.mongo_db_version = attributes[:'mongo_db_version']
-      end
-
-
-      if attributes.key?(:'location')
-        self.location = attributes[:'location']
-      end
-
-
-      if attributes.key?(:'instances')
-        self.instances = attributes[:'instances']
-      end
-
-
-      if attributes.key?(:'connections') && (value = attributes[:'connections']).is_a?(Array)
-        self.connections = value
-      end
-
-
-      if attributes.key?(:'maintenance_window')
-        self.maintenance_window = attributes[:'maintenance_window']
-      end
-
-
-      if attributes.key?(:'template_id')
-        self.template_id = attributes[:'template_id']
-      end
-
-
-      if attributes.key?(:'connection_string')
-        self.connection_string = attributes[:'connection_string']
+      if attributes.key?(:'properties')
+        self.properties = attributes[:'properties']
       end
     end
 
@@ -171,20 +87,6 @@ module IonoscloudDbaasMongo
       invalid_properties = Array.new
       
 
-
-
-
-      if !@connections.nil? && @connections.length > 1
-        invalid_properties.push('invalid value for "connections", number of items must be less than or equal to 1.')
-      end
-
-      if !@connections.nil? && @connections.length < 1
-        invalid_properties.push('invalid value for "connections", number of items must be greater than or equal to 1.')
-      end
-
-
-
-
       invalid_properties
     end
 
@@ -193,52 +95,18 @@ module IonoscloudDbaasMongo
     def valid?
       
 
-
-
-
-      return false if !@connections.nil? && @connections.length > 1
-      return false if !@connections.nil? && @connections.length < 1
-
-
-
       true
     end
 
     
-
-
-
-
-    # Custom attribute writer method with validation
-    # @param [Object] connections Value to be assigned
-    def connections=(connections)
-      if !connections.nil? && connections.length > 1
-        fail ArgumentError, 'invalid value for "connections", number of items must be less than or equal to 1.'
-      end
-
-      if !connections.nil? && connections.length < 1
-        fail ArgumentError, 'invalid value for "connections", number of items must be greater than or equal to 1.'
-      end
-
-      @connections = connections
-    end
-
-
-
 
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-        display_name == o.display_name &&
-        mongo_db_version == o.mongo_db_version &&
-        location == o.location &&
-        instances == o.instances &&
-        connections == o.connections &&
-        maintenance_window == o.maintenance_window &&
-        template_id == o.template_id &&
-        connection_string == o.connection_string
+        metadata == o.metadata &&
+        properties == o.properties
     end
 
     # @see the `==` method
@@ -250,7 +118,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [display_name, mongo_db_version, location, instances, connections, maintenance_window, template_id, connection_string].hash
+      [metadata, properties].hash
     end
 
     # Builds the object from hash

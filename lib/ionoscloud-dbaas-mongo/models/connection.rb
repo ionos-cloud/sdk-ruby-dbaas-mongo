@@ -25,7 +25,7 @@ module IonoscloudDbaasMongo
     attr_accessor :lan_id
 
 
-    # The list of IPs and subnet for your cluster. Note the following unavailable IP ranges: 10.233.64.0/18 10.233.0.0/18 10.233.114.0/24 
+    # The list of IPs for your cluster. All IPs must be in a /24 network. Note the following unavailable IP ranges: 10.233.114.0/24 
     attr_accessor :cidr_list
 
     # Attribute mapping from ruby-style variable name to JSON key.

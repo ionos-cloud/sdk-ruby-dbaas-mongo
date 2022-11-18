@@ -17,13 +17,41 @@ module IonoscloudDbaasMongo
   # The list of MongoDB templates.
   class TemplateList
   
+    attr_accessor :type
+
+
+    # The unique ID of the resource.
+    attr_accessor :id
+
+
     attr_accessor :items
+
+
+    # The offset specified in the request (if none was specified, the default offset is 0) (not implemented yet). 
+    attr_accessor :offset
+
+
+    # The limit specified in the request (if none was specified, use the endpoint's default pagination limit) (not implemented yet, always return number of items). 
+    attr_accessor :limit
+
+
+    attr_accessor :_links
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         
-        :'items' => :'items'
+        :'type' => :'type',
+
+        :'id' => :'id',
+
+        :'items' => :'items',
+
+        :'offset' => :'offset',
+
+        :'limit' => :'limit',
+
+        :'_links' => :'_links'
       }
     end
 
@@ -36,7 +64,17 @@ module IonoscloudDbaasMongo
     def self.openapi_types
       {
         
-        :'items' => :'Array<TemplateResponse>'
+        :'type' => :'ResourceType',
+
+        :'id' => :'String',
+
+        :'items' => :'Array<TemplateResponse>',
+
+        :'offset' => :'Integer',
+
+        :'limit' => :'Integer',
+
+        :'_links' => :'PaginationLinks'
       }
     end
 
@@ -44,12 +82,18 @@ module IonoscloudDbaasMongo
     def self.openapi_nullable
       Set.new([
         
+
+
+
+
+
       ])
     end
 
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
+      :'Pagination',
       :'TemplateListAllOf'
       ]
     end
@@ -70,8 +114,33 @@ module IonoscloudDbaasMongo
       }
       
 
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+
       if attributes.key?(:'items') && (value = attributes[:'items']).is_a?(Array)
         self.items = value
+      end
+
+
+      if attributes.key?(:'offset')
+        self.offset = attributes[:'offset']
+      end
+
+
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+
+      if attributes.key?(:'_links')
+        self._links = attributes[:'_links']
       end
     end
 
@@ -80,6 +149,19 @@ module IonoscloudDbaasMongo
     def list_invalid_properties
       invalid_properties = Array.new
       
+
+
+
+      if !@offset.nil? && @offset < 0
+        invalid_properties.push('invalid value for "offset", must be greater than or equal to 0.')
+      end
+
+
+      if !@limit.nil? && @limit < 0
+        invalid_properties.push('invalid value for "limit", must be greater than or equal to 0.')
+      end
+
+
       invalid_properties
     end
 
@@ -87,16 +169,53 @@ module IonoscloudDbaasMongo
     # @return true if the model is valid
     def valid?
       
+
+
+
+      return false if !@offset.nil? && @offset < 0
+
+      return false if !@limit.nil? && @limit < 0
+
       true
     end
 
     
+
+
+
+    # Custom attribute writer method with validation
+    # @param [Object] offset Value to be assigned
+    def offset=(offset)
+      if !offset.nil? && offset < 0
+        fail ArgumentError, 'invalid value for "offset", must be greater than or equal to 0.'
+      end
+
+      @offset = offset
+    end
+
+
+    # Custom attribute writer method with validation
+    # @param [Object] limit Value to be assigned
+    def limit=(limit)
+      if !limit.nil? && limit < 0
+        fail ArgumentError, 'invalid value for "limit", must be greater than or equal to 0.'
+      end
+
+      @limit = limit
+    end
+
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-        items == o.items
+        type == o.type &&
+        id == o.id &&
+        items == o.items &&
+        offset == o.offset &&
+        limit == o.limit &&
+        _links == o._links
     end
 
     # @see the `==` method
@@ -108,7 +227,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [items].hash
+      [type, id, items, offset, limit, _links].hash
     end
 
     # Builds the object from hash

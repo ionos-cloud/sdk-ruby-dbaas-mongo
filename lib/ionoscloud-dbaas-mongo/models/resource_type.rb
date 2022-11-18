@@ -18,6 +18,7 @@ module IonoscloudDbaasMongo
     COLLECTION = "collection".freeze
     CLUSTER = "cluster".freeze
     USER = "user".freeze
+    SNAPSHOT = "snapshot".freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string

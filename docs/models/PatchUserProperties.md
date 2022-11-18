@@ -1,11 +1,10 @@
-# UserProperties
+# PatchUserProperties
 
 ## Properties
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **username** | **String** |  |  |
-| **password** | **String** |  |  |
+| **password** | **String** |  | [optional] |
 | **roles** | [**Array&lt;UserRoles&gt;**](UserRoles.md) |  | [optional] |
 
 ## Example
@@ -13,8 +12,7 @@
 ```ruby
 require 'ionoscloud-dbaas-mongo'
 
-instance = IonoscloudDbaasMongo::UserProperties.new(
-  username: null,
+instance = IonoscloudDbaasMongo::PatchUserProperties.new(
   password: null,
   roles: null
 )
