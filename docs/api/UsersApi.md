@@ -4,16 +4,16 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**clusters_users_delete**](UsersApi.md#clusters_users_delete) | **DELETE** /clusters/{clusterId}/users/{database}/{username} | Delete a MongoDB User by ID |
-| [**clusters_users_find_by_id**](UsersApi.md#clusters_users_find_by_id) | **GET** /clusters/{clusterId}/users/{database}/{username} | Get a MongoDB User by ID |
-| [**clusters_users_get**](UsersApi.md#clusters_users_get) | **GET** /clusters/{clusterId}/users | Get a Cluster Users |
-| [**clusters_users_patch**](UsersApi.md#clusters_users_patch) | **PATCH** /clusters/{clusterId}/users/{database}/{username} | Patch a MongoDB User by ID |
+| [**clusters_users_delete**](UsersApi.md#clusters_users_delete) | **DELETE** /clusters/{clusterId}/users/{username} | Delete a MongoDB User by ID |
+| [**clusters_users_find_by_id**](UsersApi.md#clusters_users_find_by_id) | **GET** /clusters/{clusterId}/users/{username} | Get a MongoDB User by ID |
+| [**clusters_users_get**](UsersApi.md#clusters_users_get) | **GET** /clusters/{clusterId}/users | Get all Cluster Users |
+| [**clusters_users_patch**](UsersApi.md#clusters_users_patch) | **PATCH** /clusters/{clusterId}/users/{username} | Patch a MongoDB User by ID |
 | [**clusters_users_post**](UsersApi.md#clusters_users_post) | **POST** /clusters/{clusterId}/users | Create MongoDB User |
 
 
 ## clusters_users_delete
 
-> <User> clusters_users_delete(cluster_id, database, username)
+> <User> clusters_users_delete(cluster_id, username)
 
 Delete a MongoDB User by ID
 
@@ -38,12 +38,11 @@ end
 
 api_instance = IonoscloudDbaasMongo::UsersApi.new
 cluster_id = 'cluster_id_example' # String | The unique ID of the cluster.
-database = 'database_example' # String | The authentication database.
 username = 'username_example' # String | The authentication username.
 
 begin
   # Delete a MongoDB User by ID
-  result = api_instance.clusters_users_delete(cluster_id, database, username)
+  result = api_instance.clusters_users_delete(cluster_id, username)
   p result
 rescue IonoscloudDbaasMongo::ApiError => e
   puts "Error when calling UsersApi->clusters_users_delete: #{e}"
@@ -54,12 +53,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<User>, Integer, Hash)> clusters_users_delete_with_http_info(cluster_id, database, username)
+> <Array(<User>, Integer, Hash)> clusters_users_delete_with_http_info(cluster_id, username)
 
 ```ruby
 begin
   # Delete a MongoDB User by ID
-  data, status_code, headers = api_instance.clusters_users_delete_with_http_info(cluster_id, database, username)
+  data, status_code, headers = api_instance.clusters_users_delete_with_http_info(cluster_id, username)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <User>
@@ -73,7 +72,6 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **cluster_id** | **String** | The unique ID of the cluster. |  |
-| **database** | **String** | The authentication database. |  |
 | **username** | **String** | The authentication username. |  |
 
 ### Return type
@@ -92,11 +90,11 @@ basicAuth, tokenAuth
 
 ## clusters_users_find_by_id
 
-> <User> clusters_users_find_by_id(cluster_id, database, username)
+> <User> clusters_users_find_by_id(cluster_id, username)
 
 Get a MongoDB User by ID
 
-Retrieves the MongoDB user identified by the username and database parameters.
+Retrieves the MongoDB user identified by the username.
 
 ### Examples
 
@@ -117,12 +115,11 @@ end
 
 api_instance = IonoscloudDbaasMongo::UsersApi.new
 cluster_id = 'cluster_id_example' # String | The unique ID of the cluster.
-database = 'database_example' # String | The authentication database.
 username = 'username_example' # String | The authentication username.
 
 begin
   # Get a MongoDB User by ID
-  result = api_instance.clusters_users_find_by_id(cluster_id, database, username)
+  result = api_instance.clusters_users_find_by_id(cluster_id, username)
   p result
 rescue IonoscloudDbaasMongo::ApiError => e
   puts "Error when calling UsersApi->clusters_users_find_by_id: #{e}"
@@ -133,12 +130,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<User>, Integer, Hash)> clusters_users_find_by_id_with_http_info(cluster_id, database, username)
+> <Array(<User>, Integer, Hash)> clusters_users_find_by_id_with_http_info(cluster_id, username)
 
 ```ruby
 begin
   # Get a MongoDB User by ID
-  data, status_code, headers = api_instance.clusters_users_find_by_id_with_http_info(cluster_id, database, username)
+  data, status_code, headers = api_instance.clusters_users_find_by_id_with_http_info(cluster_id, username)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <User>
@@ -152,7 +149,6 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **cluster_id** | **String** | The unique ID of the cluster. |  |
-| **database** | **String** | The authentication database. |  |
 | **username** | **String** | The authentication username. |  |
 
 ### Return type
@@ -173,7 +169,7 @@ basicAuth, tokenAuth
 
 > <UsersList> clusters_users_get(cluster_id)
 
-Get a Cluster Users
+Get all Cluster Users
 
 Retrieves a list of MongoDB users.
 
@@ -198,7 +194,7 @@ api_instance = IonoscloudDbaasMongo::UsersApi.new
 cluster_id = 'cluster_id_example' # String | The unique ID of the cluster.
 
 begin
-  # Get a Cluster Users
+  # Get all Cluster Users
   result = api_instance.clusters_users_get(cluster_id)
   p result
 rescue IonoscloudDbaasMongo::ApiError => e
@@ -214,7 +210,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get a Cluster Users
+  # Get all Cluster Users
   data, status_code, headers = api_instance.clusters_users_get_with_http_info(cluster_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -246,7 +242,7 @@ basicAuth, tokenAuth
 
 ## clusters_users_patch
 
-> <User> clusters_users_patch(cluster_id, database, username, patch_user_request)
+> <User> clusters_users_patch(cluster_id, username, patch_user_request)
 
 Patch a MongoDB User by ID
 
@@ -271,13 +267,12 @@ end
 
 api_instance = IonoscloudDbaasMongo::UsersApi.new
 cluster_id = 'cluster_id_example' # String | The unique ID of the cluster.
-database = 'database_example' # String | The authentication database.
 username = 'username_example' # String | The authentication username.
 patch_user_request = IonoscloudDbaasMongo::PatchUserRequest.new # PatchUserRequest | Part of the MongoDB user which should be modified.
 
 begin
   # Patch a MongoDB User by ID
-  result = api_instance.clusters_users_patch(cluster_id, database, username, patch_user_request)
+  result = api_instance.clusters_users_patch(cluster_id, username, patch_user_request)
   p result
 rescue IonoscloudDbaasMongo::ApiError => e
   puts "Error when calling UsersApi->clusters_users_patch: #{e}"
@@ -288,12 +283,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<User>, Integer, Hash)> clusters_users_patch_with_http_info(cluster_id, database, username, patch_user_request)
+> <Array(<User>, Integer, Hash)> clusters_users_patch_with_http_info(cluster_id, username, patch_user_request)
 
 ```ruby
 begin
   # Patch a MongoDB User by ID
-  data, status_code, headers = api_instance.clusters_users_patch_with_http_info(cluster_id, database, username, patch_user_request)
+  data, status_code, headers = api_instance.clusters_users_patch_with_http_info(cluster_id, username, patch_user_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <User>
@@ -307,7 +302,6 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **cluster_id** | **String** | The unique ID of the cluster. |  |
-| **database** | **String** | The authentication database. |  |
 | **username** | **String** | The authentication username. |  |
 | **patch_user_request** | [**PatchUserRequest**](PatchUserRequest.md) | Part of the MongoDB user which should be modified. |  |
 

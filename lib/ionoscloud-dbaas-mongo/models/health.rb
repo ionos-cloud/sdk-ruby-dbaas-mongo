@@ -14,11 +14,10 @@ require 'date'
 require 'time'
 
 module IonoscloudDbaasMongo
-  class State
-    AVAILABLE = "AVAILABLE".freeze
-    BUSY = "BUSY".freeze
-    DESTROYING = "DESTROYING".freeze
-    FAILED = "FAILED".freeze
+  class Health
+    HEALTHY = "HEALTHY".freeze
+    UNHEALTHY = "UNHEALTHY".freeze
+    DEGRADED = "DEGRADED".freeze
     UNKNOWN = "UNKNOWN".freeze
 
     # Builds the enum from string
@@ -32,8 +31,8 @@ module IonoscloudDbaasMongo
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = State.constants.select { |c| State::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #State" if constantValues.empty?
+      constantValues = Health.constants.select { |c| Health::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #Health" if constantValues.empty?
       value
     end
   end

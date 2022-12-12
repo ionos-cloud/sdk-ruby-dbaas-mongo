@@ -11,6 +11,7 @@
 | **last_modified_by** | **String** | The last user who modified the resource. | [optional] |
 | **last_modified_by_user_id** | **String** | The ID of the user who last modified the resource. | [optional] |
 | **state** | [**State**](State.md) |  | [optional] |
+| **health** | [**Health**](Health.md) |  | [optional] |
 
 ## Example
 
@@ -24,7 +25,8 @@ instance = IonoscloudDbaasMongo::Metadata.new(
   last_modified_date: 2020-12-11T13:37:50+01:00,
   last_modified_by: jane.doe@example.com,
   last_modified_by_user_id: 87f9a82e-b28d-49ed-9d04-fba2c0459cd3,
-  state: null
+  state: null,
+  health: null
 )
 ```
 

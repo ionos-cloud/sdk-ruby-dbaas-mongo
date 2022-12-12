@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ionoscloud-dbaas-mongo (1.1.0)
+    ionoscloud-dbaas-mongo (1.2.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
