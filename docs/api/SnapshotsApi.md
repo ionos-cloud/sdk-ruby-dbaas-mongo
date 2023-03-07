@@ -9,7 +9,7 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 
 ## clusters_snapshots_get
 
-> <SnapshotList> clusters_snapshots_get(cluster_id)
+> <SnapshotList> clusters_snapshots_get(cluster_id, opts)
 
 Get the snapshots of your cluster
 
@@ -34,10 +34,14 @@ end
 
 api_instance = IonoscloudDbaasMongo::SnapshotsApi.new
 cluster_id = 'cluster_id_example' # String | The unique ID of the cluster.
+opts = {
+  limit: 100, # Integer | The maximum number of elements to return. Use together with 'offset' for pagination.
+  offset: 200 # Integer | The first element to return. Use together with 'limit' for pagination.
+}
 
 begin
   # Get the snapshots of your cluster
-  result = api_instance.clusters_snapshots_get(cluster_id)
+  result = api_instance.clusters_snapshots_get(cluster_id, opts)
   p result
 rescue IonoscloudDbaasMongo::ApiError => e
   puts "Error when calling SnapshotsApi->clusters_snapshots_get: #{e}"
@@ -48,12 +52,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SnapshotList>, Integer, Hash)> clusters_snapshots_get_with_http_info(cluster_id)
+> <Array(<SnapshotList>, Integer, Hash)> clusters_snapshots_get_with_http_info(cluster_id, opts)
 
 ```ruby
 begin
   # Get the snapshots of your cluster
-  data, status_code, headers = api_instance.clusters_snapshots_get_with_http_info(cluster_id)
+  data, status_code, headers = api_instance.clusters_snapshots_get_with_http_info(cluster_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SnapshotList>
@@ -67,10 +71,12 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **cluster_id** | **String** | The unique ID of the cluster. |  |
+| **limit** | **Integer** | The maximum number of elements to return. Use together with &#39;offset&#39; for pagination. | [optional][default to 100] |
+| **offset** | **Integer** | The first element to return. Use together with &#39;limit&#39; for pagination. | [optional][default to 0] |
 
 ### Return type
 
-[**SnapshotList**](SnapshotList.md)
+[**SnapshotList**](../models/SnapshotList.md)
 
 ### Authorization
 

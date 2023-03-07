@@ -9,7 +9,7 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 
 ## templates_get
 
-> <TemplateList> templates_get
+> <TemplateList> templates_get(opts)
 
 Get Templates
 
@@ -33,10 +33,14 @@ IonoscloudDbaasMongo.configure do |config|
 end
 
 api_instance = IonoscloudDbaasMongo::TemplatesApi.new
+opts = {
+  limit: 100, # Integer | The maximum number of elements to return. Use together with 'offset' for pagination.
+  offset: 200 # Integer | The first element to return. Use together with 'limit' for pagination.
+}
 
 begin
   # Get Templates
-  result = api_instance.templates_get
+  result = api_instance.templates_get(opts)
   p result
 rescue IonoscloudDbaasMongo::ApiError => e
   puts "Error when calling TemplatesApi->templates_get: #{e}"
@@ -47,12 +51,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TemplateList>, Integer, Hash)> templates_get_with_http_info
+> <Array(<TemplateList>, Integer, Hash)> templates_get_with_http_info(opts)
 
 ```ruby
 begin
   # Get Templates
-  data, status_code, headers = api_instance.templates_get_with_http_info
+  data, status_code, headers = api_instance.templates_get_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <TemplateList>
@@ -63,11 +67,14 @@ end
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **limit** | **Integer** | The maximum number of elements to return. Use together with &#39;offset&#39; for pagination. | [optional][default to 100] |
+| **offset** | **Integer** | The first element to return. Use together with &#39;limit&#39; for pagination. | [optional][default to 0] |
 
 ### Return type
 
-[**TemplateList**](TemplateList.md)
+[**TemplateList**](../models/TemplateList.md)
 
 ### Authorization
 

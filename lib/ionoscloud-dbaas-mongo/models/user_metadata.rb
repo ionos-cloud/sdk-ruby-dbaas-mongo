@@ -1,7 +1,7 @@
 =begin
 #IONOS DBaaS MongoDB REST API
 
-#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.   MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
+#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.  MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -28,32 +28,6 @@ module IonoscloudDbaasMongo
     # The ID of the user who created the resource.
     attr_accessor :created_by_user_id
 
-
-    # The user state.
-    attr_accessor :state
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -62,9 +36,7 @@ module IonoscloudDbaasMongo
 
         :'created_by' => :'createdBy',
 
-        :'created_by_user_id' => :'createdByUserId',
-
-        :'state' => :'state'
+        :'created_by_user_id' => :'createdByUserId'
       }
     end
 
@@ -81,9 +53,7 @@ module IonoscloudDbaasMongo
 
         :'created_by' => :'String',
 
-        :'created_by_user_id' => :'String',
-
-        :'state' => :'String'
+        :'created_by_user_id' => :'String'
       }
     end
 
@@ -91,7 +61,6 @@ module IonoscloudDbaasMongo
     def self.openapi_nullable
       Set.new([
         
-
 
 
       ])
@@ -126,11 +95,6 @@ module IonoscloudDbaasMongo
       if attributes.key?(:'created_by_user_id')
         self.created_by_user_id = attributes[:'created_by_user_id']
       end
-
-
-      if attributes.key?(:'state')
-        self.state = attributes[:'state']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -138,7 +102,6 @@ module IonoscloudDbaasMongo
     def list_invalid_properties
       invalid_properties = Array.new
       
-
 
 
       invalid_properties
@@ -150,25 +113,11 @@ module IonoscloudDbaasMongo
       
 
 
-
-      state_validator = EnumAttributeValidator.new('String', ["AVAILABLE", "CREATING", "DESTROYING"])
-      return false unless state_validator.valid?(@state)
       true
     end
 
     
 
-
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] state Object to be assigned
-    def state=(state)
-      validator = EnumAttributeValidator.new('String', ["AVAILABLE", "CREATING", "DESTROYING"])
-      unless validator.valid?(state)
-        fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
-      end
-      @state = state
-    end
 
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
@@ -177,8 +126,7 @@ module IonoscloudDbaasMongo
       self.class == o.class &&
         created_date == o.created_date &&
         created_by == o.created_by &&
-        created_by_user_id == o.created_by_user_id &&
-        state == o.state
+        created_by_user_id == o.created_by_user_id
     end
 
     # @see the `==` method
@@ -190,7 +138,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [created_date, created_by, created_by_user_id, state].hash
+      [created_date, created_by, created_by_user_id].hash
     end
 
     # Builds the object from hash

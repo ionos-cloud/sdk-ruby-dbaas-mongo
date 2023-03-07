@@ -76,7 +76,7 @@ end
 
 ### Return type
 
-[**User**](User.md)
+[**User**](../models/User.md)
 
 ### Authorization
 
@@ -153,7 +153,7 @@ end
 
 ### Return type
 
-[**User**](User.md)
+[**User**](../models/User.md)
 
 ### Authorization
 
@@ -167,7 +167,7 @@ basicAuth, tokenAuth
 
 ## clusters_users_get
 
-> <UsersList> clusters_users_get(cluster_id)
+> <UsersList> clusters_users_get(cluster_id, opts)
 
 Get all Cluster Users
 
@@ -192,10 +192,14 @@ end
 
 api_instance = IonoscloudDbaasMongo::UsersApi.new
 cluster_id = 'cluster_id_example' # String | The unique ID of the cluster.
+opts = {
+  limit: 100, # Integer | The maximum number of elements to return. Use together with 'offset' for pagination.
+  offset: 200 # Integer | The first element to return. Use together with 'limit' for pagination.
+}
 
 begin
   # Get all Cluster Users
-  result = api_instance.clusters_users_get(cluster_id)
+  result = api_instance.clusters_users_get(cluster_id, opts)
   p result
 rescue IonoscloudDbaasMongo::ApiError => e
   puts "Error when calling UsersApi->clusters_users_get: #{e}"
@@ -206,12 +210,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UsersList>, Integer, Hash)> clusters_users_get_with_http_info(cluster_id)
+> <Array(<UsersList>, Integer, Hash)> clusters_users_get_with_http_info(cluster_id, opts)
 
 ```ruby
 begin
   # Get all Cluster Users
-  data, status_code, headers = api_instance.clusters_users_get_with_http_info(cluster_id)
+  data, status_code, headers = api_instance.clusters_users_get_with_http_info(cluster_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UsersList>
@@ -225,10 +229,12 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **cluster_id** | **String** | The unique ID of the cluster. |  |
+| **limit** | **Integer** | The maximum number of elements to return. Use together with &#39;offset&#39; for pagination. | [optional][default to 100] |
+| **offset** | **Integer** | The first element to return. Use together with &#39;limit&#39; for pagination. | [optional][default to 0] |
 
 ### Return type
 
-[**UsersList**](UsersList.md)
+[**UsersList**](../models/UsersList.md)
 
 ### Authorization
 
@@ -303,11 +309,11 @@ end
 | ---- | ---- | ----------- | ----- |
 | **cluster_id** | **String** | The unique ID of the cluster. |  |
 | **username** | **String** | The authentication username. |  |
-| **patch_user_request** | [**PatchUserRequest**](PatchUserRequest.md) | Part of the MongoDB user which should be modified. |  |
+| **patch_user_request** | [**PatchUserRequest**](../models/PatchUserRequest.md) | Part of the MongoDB user which should be modified. |  |
 
 ### Return type
 
-[**User**](User.md)
+[**User**](../models/User.md)
 
 ### Authorization
 
@@ -380,11 +386,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **cluster_id** | **String** | The unique ID of the cluster. |  |
-| **user** | [**User**](User.md) | The user to be created. |  |
+| **user** | [**User**](../models/User.md) | The user to be created. |  |
 
 ### Return type
 
-[**User**](User.md)
+[**User**](../models/User.md)
 
 ### Authorization
 

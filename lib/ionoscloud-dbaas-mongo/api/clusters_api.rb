@@ -1,7 +1,7 @@
 =begin
 #IONOS DBaaS MongoDB REST API
 
-#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.   MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
+#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.  MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -148,6 +148,8 @@ module IonoscloudDbaasMongo
     # Get Clusters
     # Retrieves a list of MongoDB clusters.
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit The maximum number of elements to return. Use together with &#39;offset&#39; for pagination. (default to 100)
+    # @option opts [Integer] :offset The first element to return. Use together with &#39;limit&#39; for pagination. (default to 0)
     # @option opts [String] :filter_name Response filter to list only the MongoDB clusters that contain the specified name. The value is case insensitive and matched on the &#39;displayName&#39; field. 
     # @return [ClusterList]
     def clusters_get(opts = {})
@@ -158,17 +160,29 @@ module IonoscloudDbaasMongo
     # Get Clusters
     # Retrieves a list of MongoDB clusters.
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit The maximum number of elements to return. Use together with &#39;offset&#39; for pagination.
+    # @option opts [Integer] :offset The first element to return. Use together with &#39;limit&#39; for pagination.
     # @option opts [String] :filter_name Response filter to list only the MongoDB clusters that contain the specified name. The value is case insensitive and matched on the &#39;displayName&#39; field. 
     # @return [Array<(ClusterList, Integer, Hash)>] ClusterList data, response status code and response headers
     def clusters_get_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClustersApi.clusters_get ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ClustersApi.clusters_get, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ClustersApi.clusters_get, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/clusters'
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
       query_params[:'filter.name'] = opts[:'filter_name'] if !opts[:'filter_name'].nil?
 
       # header parameters

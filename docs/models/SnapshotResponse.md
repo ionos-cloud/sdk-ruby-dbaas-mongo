@@ -14,7 +14,7 @@
 require 'ionoscloud-dbaas-mongo'
 
 instance = IonoscloudDbaasMongo::SnapshotResponse.new(
-  type: null,
+  type: snapshot,
   id: 498ae72f-411f-11eb-9d07-046c59cc737e,
   properties: null
 )

@@ -1,7 +1,7 @@
 =begin
 #IONOS DBaaS MongoDB REST API
 
-#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.   MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
+#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.  MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -23,6 +23,8 @@ module IonoscloudDbaasMongo
     # Retrieves MongoDB snapshots.
     # @param cluster_id [String] The unique ID of the cluster.
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit The maximum number of elements to return. Use together with &#39;offset&#39; for pagination. (default to 100)
+    # @option opts [Integer] :offset The first element to return. Use together with &#39;limit&#39; for pagination. (default to 0)
     # @return [SnapshotList]
     def clusters_snapshots_get(cluster_id, opts = {})
       data, _status_code, _headers = clusters_snapshots_get_with_http_info(cluster_id, opts)
@@ -33,6 +35,8 @@ module IonoscloudDbaasMongo
     # Retrieves MongoDB snapshots.
     # @param cluster_id [String] The unique ID of the cluster.
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit The maximum number of elements to return. Use together with &#39;offset&#39; for pagination.
+    # @option opts [Integer] :offset The first element to return. Use together with &#39;limit&#39; for pagination.
     # @return [Array<(SnapshotList, Integer, Hash)>] SnapshotList data, response status code and response headers
     def clusters_snapshots_get_with_http_info(cluster_id, opts = {})
       if @api_client.config.debugging
@@ -42,11 +46,21 @@ module IonoscloudDbaasMongo
       if @api_client.config.client_side_validation && cluster_id.nil?
         fail ArgumentError, "Missing the required parameter 'cluster_id' when calling SnapshotsApi.clusters_snapshots_get"
       end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling SnapshotsApi.clusters_snapshots_get, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling SnapshotsApi.clusters_snapshots_get, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/clusters/{clusterId}/snapshots'.sub('{' + 'clusterId' + '}', CGI.escape(cluster_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

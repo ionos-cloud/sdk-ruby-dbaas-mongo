@@ -1,7 +1,7 @@
 =begin
 #IONOS DBaaS MongoDB REST API
 
-#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.   MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
+#With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.  MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
 
 The version of the OpenAPI document: 1.0.0
 
@@ -16,15 +16,15 @@ require 'time'
 module IonoscloudDbaasMongo
   class Pagination
   
-    # The offset specified in the request (if none was specified, the default offset is 0) (not implemented yet). 
+    # The offset specified in the request (if none was specified, the default offset is 0). 
     attr_accessor :offset
 
 
-    # The limit specified in the request (if none was specified, use the endpoint's default pagination limit) (not implemented yet, always return number of items). 
+    # The limit specified in the request (if none was specified, the default limit is 100). 
     attr_accessor :limit
 
 
-    attr_accessor :_links
+    attr_accessor :links
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -34,7 +34,7 @@ module IonoscloudDbaasMongo
 
         :'limit' => :'limit',
 
-        :'_links' => :'_links'
+        :'links' => :'links'
       }
     end
 
@@ -51,7 +51,7 @@ module IonoscloudDbaasMongo
 
         :'limit' => :'Integer',
 
-        :'_links' => :'PaginationLinks'
+        :'links' => :'PaginationLinks'
       }
     end
 
@@ -82,16 +82,20 @@ module IonoscloudDbaasMongo
 
       if attributes.key?(:'offset')
         self.offset = attributes[:'offset']
+      else
+        self.offset = 0
       end
 
 
       if attributes.key?(:'limit')
         self.limit = attributes[:'limit']
+      else
+        self.limit = 100
       end
 
 
-      if attributes.key?(:'_links')
-        self._links = attributes[:'_links']
+      if attributes.key?(:'links')
+        self.links = attributes[:'links']
       end
     end
 
@@ -104,6 +108,10 @@ module IonoscloudDbaasMongo
         invalid_properties.push('invalid value for "offset", must be greater than or equal to 0.')
       end
 
+
+      if !@limit.nil? && @limit > 1000
+        invalid_properties.push('invalid value for "limit", must be smaller than or equal to 1000.')
+      end
 
       if !@limit.nil? && @limit < 0
         invalid_properties.push('invalid value for "limit", must be greater than or equal to 0.')
@@ -119,6 +127,7 @@ module IonoscloudDbaasMongo
       
       return false if !@offset.nil? && @offset < 0
 
+      return false if !@limit.nil? && @limit > 1000
       return false if !@limit.nil? && @limit < 0
 
       true
@@ -139,6 +148,10 @@ module IonoscloudDbaasMongo
     # Custom attribute writer method with validation
     # @param [Object] limit Value to be assigned
     def limit=(limit)
+      if !limit.nil? && limit > 1000
+        fail ArgumentError, 'invalid value for "limit", must be smaller than or equal to 1000.'
+      end
+
       if !limit.nil? && limit < 0
         fail ArgumentError, 'invalid value for "limit", must be greater than or equal to 0.'
       end
@@ -154,7 +167,7 @@ module IonoscloudDbaasMongo
       self.class == o.class &&
         offset == o.offset &&
         limit == o.limit &&
-        _links == o._links
+        links == o.links
     end
 
     # @see the `==` method
@@ -166,7 +179,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [offset, limit, _links].hash
+      [offset, limit, links].hash
     end
 
     # Builds the object from hash

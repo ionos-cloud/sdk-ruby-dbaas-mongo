@@ -14,7 +14,7 @@
 require 'ionoscloud-dbaas-mongo'
 
 instance = IonoscloudDbaasMongo::User.new(
-  type: null,
+  type: user,
   metadata: null,
   properties: null
 )
