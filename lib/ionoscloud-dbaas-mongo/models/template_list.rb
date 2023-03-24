@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module IonoscloudDbaasMongo
-  # The list of MongoDB templates.
+  # List of MongoDB templates.
   class TemplateList
   
     attr_accessor :type

@@ -14,32 +14,41 @@ require 'date'
 require 'time'
 
 module IonoscloudDbaasMongo
-  # A MongoDB template.
-  class TemplateResponse
+  # The properties of a MongoDB template.
+  class TemplateProperties
   
-    attr_accessor :type
+    # The name of the template.
+    attr_accessor :name
 
 
-    # The unique ID of the resource.
-    attr_accessor :id
+    # The edition of the template (e.g. enterprise)
+    attr_accessor :edition
 
 
-    attr_accessor :metadata
+    # The number of CPU cores.
+    attr_accessor :cores
 
 
-    attr_accessor :properties
+    # The amount of memory in GB.
+    attr_accessor :ram
+
+
+    # The amount of storage size in GB.
+    attr_accessor :storage_size
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         
-        :'type' => :'type',
+        :'name' => :'name',
 
-        :'id' => :'id',
+        :'edition' => :'edition',
 
-        :'metadata' => :'metadata',
+        :'cores' => :'cores',
 
-        :'properties' => :'properties'
+        :'ram' => :'ram',
+
+        :'storage_size' => :'storageSize'
       }
     end
 
@@ -52,13 +61,15 @@ module IonoscloudDbaasMongo
     def self.openapi_types
       {
         
-        :'type' => :'ResourceType',
+        :'name' => :'String',
 
-        :'id' => :'String',
+        :'edition' => :'String',
 
-        :'metadata' => :'Metadata',
+        :'cores' => :'Integer',
 
-        :'properties' => :'TemplateProperties'
+        :'ram' => :'Integer',
+
+        :'storage_size' => :'Integer'
       }
     end
 
@@ -69,6 +80,7 @@ module IonoscloudDbaasMongo
 
 
 
+
       ])
     end
 
@@ -76,35 +88,40 @@ module IonoscloudDbaasMongo
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `IonoscloudDbaasMongo::TemplateResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `IonoscloudDbaasMongo::TemplateProperties` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `IonoscloudDbaasMongo::TemplateResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `IonoscloudDbaasMongo::TemplateProperties`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
       
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'edition')
+        self.edition = attributes[:'edition']
       end
 
 
-      if attributes.key?(:'metadata')
-        self.metadata = attributes[:'metadata']
+      if attributes.key?(:'cores')
+        self.cores = attributes[:'cores']
       end
 
 
-      if attributes.key?(:'properties')
-        self.properties = attributes[:'properties']
+      if attributes.key?(:'ram')
+        self.ram = attributes[:'ram']
+      end
+
+
+      if attributes.key?(:'storage_size')
+        self.storage_size = attributes[:'storage_size']
       end
     end
 
@@ -113,6 +130,7 @@ module IonoscloudDbaasMongo
     def list_invalid_properties
       invalid_properties = Array.new
       
+
 
 
 
@@ -126,10 +144,12 @@ module IonoscloudDbaasMongo
 
 
 
+
       true
     end
 
     
+
 
 
 
@@ -138,10 +158,11 @@ module IonoscloudDbaasMongo
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-        type == o.type &&
-        id == o.id &&
-        metadata == o.metadata &&
-        properties == o.properties
+        name == o.name &&
+        edition == o.edition &&
+        cores == o.cores &&
+        ram == o.ram &&
+        storage_size == o.storage_size
     end
 
     # @see the `==` method
@@ -153,7 +174,7 @@ module IonoscloudDbaasMongo
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, id, metadata, properties].hash
+      [name, edition, cores, ram, storage_size].hash
     end
 
     # Builds the object from hash
